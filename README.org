@@ -1,22 +1,15 @@
-	•	mngm_task
+* mngm_task
+ - ターミナル上で完結するシンプルな TODO 管理ツールです．
+   - CLI コマンド名：mngm_task
+   - データ保存形式：YAML (.mngm_task/todos.yaml)
 
-ターミナル上で完結するシンプルな TODO 管理ツールです．
-小さいタスクや作業メモを，サクッと追加・一覧・完了管理できます．
-	•	CLI コマンド名：mngm_task
-	•	データ保存形式：YAML（.mngm_task/todos.yaml）
+** インストール
+*** 前提
+ - Ruby 3 系 (開発環境：Ruby 3.2.4)
+ - Bundler がインストールされていること
 
-⸻
-
-	•	インストール
-
-** 前提
-	•	Ruby 3 系（開発環境：Ruby 3.2.4）
-	•	Bundler がインストールされていること
-
-** 手順
-
-このリポジトリをクローンまたは展開して，ディレクトリに入ります．
-
+*** 手順
+ - このリポジトリをクローンまたは展開して，ディレクトリに入ります．
 #+BEGIN_SRC bash
 cd mngm_task
 bundle install
@@ -24,92 +17,62 @@ rake build
 rake install
 #+END_SRC
 
-rake install まで完了すると，mngm_task コマンドが使えるようになります．
+ - rake install まで完了すると，mngm_task コマンドが使えるようになります．
 
-⸻
-
-	•	コマンド一覧
-
-mngm_task には，現在次の 3 つのコマンドが実装されています．
-	•	add  … TODO を追加する
-	•	list … TODO を一覧表示する
-	•	done … TODO を完了にする
-
-それぞれの使い方を説明します．
-
-⸻
-
-	•	コマンド詳細
-
-** mngm_task add — TODO を追加する
-
-新しい TODO を追加します．
-
+** コマンド一覧
+ - mngm_task には，現在次の 3 つのコマンドが実装されています．
+   - add  … TODO を追加する
+   - list … TODO を一覧表示する
+   - done … TODO を完了にする
+** コマンド詳細
+*** mngm_task add — TODO を追加する
+ - 新しい TODO を追加します．
 #+BEGIN_SRC bash
 mngm_task add –title “BPv7 の図を描き直す”
 #+END_SRC
-
-*** オプション
-	•	–title, -t
-追加したい TODO のタイトルを指定します（必須）．
-
-*** 実行例
-
+**** オプション
+ - –title, -t
+   - 追加したい TODO のタイトルを指定します (必須)
+**** 実行例
 #+BEGIN_SRC bash
 $ mngm_task add –title “BPv7 の図を描き直す”
 [1] BPv7 の図を描き直す を追加しました
 #+END_SRC
+ - 以下が .mngm_task/todos.yaml に保存されます．
+   - ID：1
+   - タイトル：BPv7 の図を描き直す
+   - ステータス：open (未完了)
 
-この場合，
-	•	ID：1
-	•	タイトル：BPv7 の図を描き直す
-	•	ステータス：open（未完了）
-
-という TODO が .mngm_task/todos.yaml に保存されます．
-
-⸻
-
-** mngm_task list — TODO を一覧表示する
-
-登録されている TODO を一覧表示します．
-
+*** mngm_task list — TODO を一覧表示する
+ - 登録されている TODO を一覧表示します．
 #+BEGIN_SRC bash
 mngm_task list
 #+END_SRC
-
-*** 実行例
-
+**** 実行例
 #+BEGIN_SRC bash
 $ mngm_task list
 [ ] (1) BPv7 の図を描き直す
 [ ] (2) 資料のレイアウトを修正する
 #+END_SRC
-	•	行頭の [ ] は未完了の TODO を表します．
-	•	done コマンドで完了にすると [✔] に変わります．
-
-TODO が 1 件もない場合は，次のように表示されます．
-
+ - 行頭の [ ] は未完了の TODO を表します．
+ - done コマンドで完了にすると [✔] に変わります．
+ - TODO が 1 件もない場合は，次のように表示されます．
 #+BEGIN_SRC bash
 $ mngm_task list
 TODO はありません ✅
 #+END_SRC
 
-⸻
-
-** mngm_task done — TODO を完了にする
-
-指定した ID の TODO のステータスを完了に変更します．
-
+*** mngm_task done — TODO を完了にする
+ - 指定した ID の TODO のステータスを完了に変更します．
 #+BEGIN_SRC bash
 mngm_task done –id 1
 #+END_SRC
 
-*** オプション
-	•	–id, -i
-完了にしたい TODO の ID を指定します（必須）．
+**** オプション
+ - –id, -i
+   - 完了にしたい TODO の ID を指定します（必須）．
 
-*** 実行例
-
+**** 実行例
 #+BEGIN_SRC bash
 $ mngm_task list
 [ ] (1) BPv7 の図を描き直す
@@ -121,17 +84,10 @@ $ mngm_task list
 [✔] (1) BPv7 の図を描き直す
 #+END_SRC
 
-存在しない ID を指定した場合は，その旨のメッセージが表示されます．
-
-⸻
-
-	•	データの保存形式
-
-TODO は YAML ファイルとして保存されます．
-	•	保存先：.mngm_task/todos.yaml
-
-例：
-
+ - 存在しない ID を指定した場合は，その旨のメッセージが表示されます．
+** データの保存形式
+ - TODO は YAML ファイルとして保存されます．
+   - 保存先：.mngm_task/todos.yaml (以下に例を示す)
 #+BEGIN_SRC yaml
 	•	id: 1
 title: “BPv7 の図を描き直す”
@@ -141,68 +97,4 @@ created_at: “2025-12-11T22:30:00+09:00”
 title: “資料のレイアウトを修正する”
 status: “open”
 created_at: “2025-12-11T23:00:00+09:00”
-#+END_SRC
-
-⸻
-
-	•	開発用：Rake タスク経由で実行する
-
-リポジトリ直下では，Rake タスク経由でも同様の操作が可能です．
-開発中に CLI 周りを試すときに便利です．
-
-** TODO の追加
-
-#+BEGIN_SRC bash
-rake “todo:add[BPv7 の図を描き直す]”
-
-または
-
-TITLE=“BPv7 の図を描き直す” rake todo:add
-#+END_SRC
-
-** TODO の一覧表示
-
-#+BEGIN_SRC bash
-rake todo:list
-#+END_SRC
-
-** TODO の完了
-
-#+BEGIN_SRC bash
-rake “todo:done[1]”
-
-または
-
-ID=1 rake todo:done
-#+END_SRC
-
-⸻
-
-	•	ディレクトリ構成（開発者向け）
-
-プロジェクトのディレクトリ構成は次のとおりです．
-
-#+BEGIN_SRC text
-mngm_task/
-Gemfile
-mngm_task.gemspec
-Rakefile
-
-exe/
-mngm_task          # 実行ファイル（CLI エントリポイント）
-
-lib/
-mngm_task.rb       # ライブラリ入口（require の集約）
-mngm_task/
-version.rb       # バージョン定義 (VERSION)
-cli.rb           # CLI 層（サブコマンド／オプション解析）
-todo.rb          # TODO エンティティ
-repository.rb    # YAML 保存／読み込み
-commands/
-add.rb         # TODO 追加
-list.rb        # TODO 一覧
-done.rb        # TODO 完了
-
-pkg/
-mngm_task-0.1.0.gem  # rake build の成果物
 #+END_SRC
