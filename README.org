@@ -1,3 +1,5 @@
+#+AUTHOR: Kwansei Gakuin Univ. Masaki Komatsu
+
 * mngm_task
  - ターミナル上で完結するシンプルな TODO 管理ツールです．
    - CLI コマンド名：mngm_task
