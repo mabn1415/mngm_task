@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+# bin/mngm_task
+
+# lib ディレクトリをロードパスに追加
+$LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
+
+require "mngm_task"
+
+MngmTask::CLI.run(ARGV)
